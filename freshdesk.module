@@ -5,8 +5,21 @@
  * Module file for Freshbook Module
  */
 
-
-
+/**
+ * Implements hook_menu().
+ */
+function freshdesk_menu() {
+  $items = array();
+  $items['freshdesk/support/portal'] = array(
+    'title' => 'Freshdesk Support Portal',
+    'description' => 'Single Sign On to Support Portal',
+    'page callback' => '_freshdesk_support_portal',
+    'page arguments' => array(),
+    'access callback' => 'user_is_logged_in',
+    'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
 
 /**
  * Page call back for Freshdesk SSO
