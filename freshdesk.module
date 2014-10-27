@@ -10,6 +10,20 @@
  */
 function freshdesk_menu() {
   $items = array();
+  $items['admin/config/services/freshdesk'] = array(
+    'title' => 'Freshdesk Admin Page',
+    'description' => 'Freshdesk Adminstrative Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('freshdesk_admin_account'),
+    'access arguments' => array('administer freshdesk module'),
+    'file' => 'google_adwords.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['admin/config/services/freshdesk/default'] = array(
+    'title' => 'Freshdesk Admin Page',
+    'weight' => 0,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
   $items['freshdesk/support/portal'] = array(
     'title' => 'Freshdesk Support Portal',
     'description' => 'Single Sign On to Support Portal',
@@ -19,6 +33,17 @@ function freshdesk_menu() {
     'type' => MENU_LOCAL_TASK,
   );
   return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function freshdesk_permission() {
+  return array(
+    'administer freshdesk module' => array(
+      'title' => t('Administer Freshdesk Module'),
+    ),
+  );
 }
 
 /**
