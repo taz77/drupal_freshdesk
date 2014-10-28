@@ -15,11 +15,12 @@ function freshdesk_admin_account($form, &$form_state) {
     '#type' => 'textfield',
     '#size' => '100',
     '#title' => t('URL of your Freshdesk Account'),
+    '#description' => t('Highly advisable to use the HTTPS version. ex. https://example.freshdesk.com'),
     '#default_value' => variable_get('freshdesk_url', ''),
   );
   $form['freshdesk_api_key'] = array(
     '#type' => 'textfield',
-    '#size' => '3',
+    '#size' => '40',
     '#title' => t('API Key for Freshdesk Agent Account'),
     '#description' => t('Freshdesk API keys are agent specific, there is no key for the account in general.  Go <a href="@url">here</a> to read how to obtain a key', array('@url' => 'http://freshdesk.com/api#authentication')),
     '#default_value' => variable_get('freshdesk_api_key', ''),
@@ -29,7 +30,10 @@ function freshdesk_admin_account($form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => t('Single Sign-On Configuration'),
     '#collapsible' => FALSE,
-  );
+  );  
+  $form['freshdesk_sso']['freshdesk_sso_intro'] = array(
+    '#markup' => t('This creates a Simple SSO launch page at the path <tt>freshdesk/support/portal</tt>. <br />If you want to alter this path you can use a module such as Pathauto to do so.'),
+    );
   $form['freshdesk_sso']['freshdesk_sso_key'] = array(
     '#type' => 'textfield',
     '#size' => '100',
