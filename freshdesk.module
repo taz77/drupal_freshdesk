@@ -16,7 +16,7 @@ function freshdesk_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('freshdesk_admin_account'),
     'access arguments' => array('administer freshdesk module'),
-    'file' => 'google_adwords.admin.inc',
+    'file' => 'freshdesk.admin.inc',
     'type' => MENU_LOCAL_TASK,
   );
   $items['admin/config/services/freshdesk/default'] = array(
