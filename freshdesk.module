@@ -60,6 +60,6 @@ function _freshdesk_support_portal() {
  */
 function freshdesk_login_url($name, $email) {
   $secret = variable_get('freshdesk_sso_secret', '');
-  $base = 'https://swingsurgeon.freshdesk.com/';
+  $base = variable_get('freshdesk_url', '');
   return $base . "login/sso/?name=" . urlencode($name) . "&email=" . urlencode($email) . "&hash=" . hash('md5', $name . $email . $secret);
 }
