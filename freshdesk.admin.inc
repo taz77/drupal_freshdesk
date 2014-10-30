@@ -30,10 +30,10 @@ function freshdesk_admin_account($form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => t('Single Sign-On Configuration'),
     '#collapsible' => FALSE,
-  );  
+  );
   $form['freshdesk_sso']['freshdesk_sso_intro'] = array(
     '#markup' => t('This creates a Simple SSO launch page at the path <tt>freshdesk/support/portal</tt>. <br />If you want to alter this path you can use a module such as Pathauto to do so.'),
-    );
+  );
   $form['freshdesk_sso']['freshdesk_sso_key'] = array(
     '#type' => 'textfield',
     '#size' => '100',
@@ -51,6 +51,52 @@ function freshdesk_admin_account($form, &$form_state) {
 function freshdesk_admin_widget_popup($form, &$form_state) {
 
   $form = array();
+  $form['intro'] = array(
+    '#prefix' => '<span style="font-size: 1.2em;">',
+    '#markup' => t('This will allow you to enable and customize the Freshdesk JS popup widget. Currently this turns on the popup site wide.'),
+    '#suffix' => '</span>',
+  );
+  $form['intro1'] = array(
+    '#prefix' => '<span style="font-size: 1.8em;">',
+    '#markup' => t('This is unfinished at the moment.'),
+    '#suffix' => '</span>',
+  );
+  $form['freshdesk_widget_popup_control'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Popup control settings'),
+    '#collapsible' => FALSE,
+  );
+  $form['freshdesk_widget_popup_control']['freshdesk_widget_popup_enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Check this box to enable the popup.')
+  );
+  $form['freshdesk_widget_popup_button_type'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Button Settings'),
+    '#collapsible' => FALSE,
+  );
+  $form['freshdesk_widget_popup_button_type']['freshdesk_widget_popup_type'] = array(
+    '#type' => 'select',
+    '#title' => t('Type of display, button or text'),
+    '#description' => t('Do you want to display an image to click or text to click for the popup?'),
+    '#options' => array(
+      'button' => t('Button'),
+      'text' => t('Text'),
+    ),
+    '#default_value' => variable_get('freshdesk_widget_popup_type', 'button'),
+  );
+  $form['freshdesk_widget_popup_button_type']['freshdesk_widget_popup_position'] = array(
+    '#type' => 'select',
+    '#title' => t('Button position'),
+    '#description' => t('Position of the overlayed popup button or image button on the page.'),
+    '#options' => array(
+      4 => t('Left'),
+      2 => t('Right'),
+      1 => t('Top'),
+      3 => t('Bottom'),
+    ),
+    '#default_value' => variable_get('freshdesk_widget_popup_position', 4),
+  );
 
   return system_settings_form($form);
 }
