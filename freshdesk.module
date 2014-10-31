@@ -69,7 +69,7 @@ function _freshdesk_support_portal() {
  * Freshdesk SSO helper function to create login URL.
  */
 function freshdesk_login_url($name, $email) {
-  $secret = variable_get('freshdesk_sso_secret', '');
+  $secret = variable_get('freshdesk_sso_key', '');
   $base = variable_get('freshdesk_url', '');
   return $base . '/login/sso/?name=' . urlencode($name) . '&email=' . urlencode($email) . '&hash=' . hash('md5', $name . $email . $secret);
 }
