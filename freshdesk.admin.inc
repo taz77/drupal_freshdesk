@@ -49,7 +49,6 @@ function freshdesk_admin_account($form, &$form_state) {
  * The form to provide Feedback Popup widget
  */
 function freshdesk_admin_widget_popup($form, &$form_state) {
-
   $form = array();
   $form['intro'] = array(
     '#prefix' => '<span style="font-size: 1.2em;">',
@@ -57,9 +56,9 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     '#suffix' => '</span>',
   );
   $form['intro1'] = array(
-    '#prefix' => '<span style="font-size: 1.8em;">',
+    '#prefix' => '<div style="font-size: 1.8em;">',
     '#markup' => t('This is unfinished at the moment.'),
-    '#suffix' => '</span>',
+    '#suffix' => '</div>',
   );
   $form['freshdesk_widget_popup_control'] = array(
     '#type' => 'fieldset',
@@ -105,8 +104,17 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
  * The form to provide Feedback Embed widget
  */
 function freshdesk_admin_widget_embed($form, &$form_state) {
-
   $form = array();
+  $form['intro'] = array(
+    '#prefix' => '<div style="font-size: 1.2em;">',
+    '#markup' => t('This will allow you to enable and customize the Freshdesk embed widget and apply it to the bottom of pages'),
+    '#suffix' => '</div>',
+  );
+  $form['intro1'] = array(
+    '#prefix' => '<div style="font-size: 1.8em;">',
+    '#markup' => t('This is unfinished at the moment.'),
+    '#suffix' => '</div>',
+  );
 
   return system_settings_form($form);
 }
