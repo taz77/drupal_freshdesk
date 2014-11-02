@@ -4,3 +4,12 @@
  * @file
  * Install file for Freshbook Module
  */
+
+/**
+ * Implements hook_uninstall()
+ */
+function freshdesk_uninstall() {
+  // Delete all the freshdesk variables and then clear the variable cache.
+  db_query("DELETE FROM {variable} WHERE name LIKE 'freshdesk_%'");
+  cache_clear_all('variables', 'cache');
+}
