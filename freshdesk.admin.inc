@@ -67,7 +67,14 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
   );
   $form['freshdesk_widget_popup_control']['freshdesk_widget_popup_enable'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Check this box to enable the popup.')
+    '#title' => t('Check this box to enable the popup.'),
+    '#default_value' => variable_get('freshdesk_widget_popup_enable', 0),
+  );
+  $form['freshdesk_widget_popup_control']['freshdesk_widget_popup_form_responsive'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Uncheck this to not use responsive layout.'),
+    '#default_value' => variable_get('freshdesk_widget_popup_form_responsive', 1),
+    '#prefix' => '<em>' . t('Responsive layout control') . '</em>',
   );
   $form['freshdesk_widget_popup_button_type'] = array(
     '#type' => 'fieldset',
@@ -96,7 +103,57 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     ),
     '#default_value' => variable_get('freshdesk_widget_popup_position', 4),
   );
+  $form['freshdesk_widget_popup_button_type']['freshdesk_widget_popup_offset'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Offset'),
+    '#description' => t('Offset distance from the left or top of the screen in pixels.'),
+    '#default_value' => variable_get('freshdesk_widget_popup_offset', 235),
+    '#size' => 5,
+  );
+  $form['freshdesk_widget_popup_customize_form'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Customize Form'),
+    '#collapsible' => FALSE,
+  );
+  $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_heading'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Form Heading'),
+    '#default_value' => variable_get('freshdesk_widget_popup_form_heading', 'Help & Support'),
+    '#size' => 120,
+  );
+  $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_submit_message'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Submit Message'),
+    '#default_value' => variable_get('freshdesk_widget_popup_form_submit_message', 'Thank you for your feedback'),
+    '#rows' => 2,
+    '#cols' => 100,
+  );
+  $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_height'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Form Height'),
+    '#description' => t('Height of the form in pixels.'),
+    '#default_value' => variable_get('freshdesk_widget_popup_form_height', 500),
+    '#size' => 5,
+  );
+  $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_screenshot'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Allow users to take screenshots?'),
+    '#default_value' => variable_get('freshdesk_widget_popup_form_screenshot', 1),
+  );
+  $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_attach'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Allow users to attach files?'),
+    '#default_value' => variable_get('freshdesk_widget_popup_form_attach', 1),
+  );
+  $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_search'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Allow users to search articles?'),
+    '#default_value' => variable_get('freshdesk_widget_popup_form_search', 1),
+  );
 
+  $form['information'] = array(
+    '#markup' => t('We only implement the SSL version of the form for this module. So there is no switch for SSL.')
+  );
   return system_settings_form($form);
 }
 
