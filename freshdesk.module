@@ -71,7 +71,7 @@ function freshdesk_permission() {
  */
 function _freshdesk_support_portal() {
   global $user;
-  header("Location: " . freshdesk_login_url($user->name, $user->email));
+  header("Location: " . freshdesk_login_url($user->name, $user->mail));
   return TRUE;
 }
 
