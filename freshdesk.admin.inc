@@ -86,11 +86,61 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     '#title' => t('Type of display, button or text'),
     '#description' => t('Do you want to display an image to click or text to click for the popup?'),
     '#options' => array(
+      0 => t('Please Select'),
       'button' => t('Button'),
       'text' => t('Text'),
     ),
-    '#default_value' => variable_get('freshdesk_widget_popup_type', 'button'),
+    '#default_value' => variable_get('freshdesk_widget_popup_type'),
+    '#ajax' => array(
+      'callback' => 'freshdesk_ajax_type_attribute',
+      'wrapper' => 'replace_freshdesk_type_attribute',
+    ),
   );
+  if (!empty(variable_get('freshdesk_widget_popup_type'))) {
+    $popup_type = variable_get('freshdesk_widget_popup_type');
+    switch ($popup_type) {
+      case 'text':
+        $att_title = t('Button Text');
+        $att_description = t('What do you want the button to say?');
+        break;
+
+      case 'button':
+        $att_title = t('URL to button image');
+        $att_description = t('What image do you want to use? Freshdesk provides a button here: https://s3.amazonaws.com/assets.freshdesk.com/widget/help-button.png');
+        break;
+
+      default:
+        $att_title = t('Select Type First');
+        $att_description = '';
+        break;
+    }
+  }
+  else {
+    $att_title = t('Select Type First');
+    $att_description = '';
+  }
+
+
+  $form['freshdesk_widget_popup_button_type']['freshdesk_widget_popup_type_attribute'] = array(
+    '#type' => 'textfield',
+    '#title' => $att_title,
+    '#description' => $att_description,
+    '#default_value' => variable_get('freshdesk_widget_popup_type_attribute'),
+    '#size' => 100,
+    '#prefix' => '<div id="replace_freshdesk_type_attribute">',
+    '#suffix' => '</div>',
+  );
+  if (!empty($form_state['values']['freshdesk_widget_popup_type'])) {
+
+    if ($form_state['values']['freshdesk_widget_popup_type'] == 'text') {
+      $form['freshdesk_widget_popup_button_type']['freshdesk_widget_popup_type_attribute']['#title'] = t('Button Text');
+      $form['freshdesk_widget_popup_button_type']['freshdesk_widget_popup_type_attribute']['#description'] = t('What do you want the button to say?');
+    }
+    if ($form_state['values']['freshdesk_widget_popup_type'] == 'button') {
+      $form['freshdesk_widget_popup_button_type']['freshdesk_widget_popup_type_attribute']['#title'] = t('URL to button image');
+      $form['freshdesk_widget_popup_button_type']['freshdesk_widget_popup_type_attribute']['#description'] = t('What image do you want to use? Freshdesk provides a button here: https://s3.amazonaws.com/assets.freshdesk.com/widget/help-button.png');
+    }
+  }
   $form['freshdesk_widget_popup_button_type']['freshdesk_widget_popup_position'] = array(
     '#type' => 'select',
     '#title' => t('Button position'),
@@ -118,7 +168,7 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
   $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_heading'] = array(
     '#type' => 'textfield',
     '#title' => t('Form Heading'),
-    '#default_value' => variable_get('freshdesk_widget_popup_form_heading', 'Help & Support'),
+    '#default_value' => variable_get('freshdesk_widget_popup_form_heading', 'Help and Support'),
     '#size' => 120,
   );
   $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_submit_message'] = array(
@@ -174,4 +224,11 @@ function freshdesk_admin_widget_embed($form, &$form_state) {
   );
 
   return system_settings_form($form);
+}
+
+/**
+ * AJAX callback to replace button attribute.
+ */
+function freshdesk_ajax_type_attribute($form, $form_state) {
+  return $form['freshdesk_widget_popup_button_type']['freshdesk_widget_popup_type_attribute'];
 }
