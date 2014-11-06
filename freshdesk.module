@@ -83,3 +83,33 @@ function freshdesk_login_url($name, $email) {
   $base = variable_get('freshdesk_url', '');
   return $base . '/login/sso/?name=' . urlencode($name) . '&email=' . urlencode($email) . '&hash=' . hash('md5', $name . $email . $secret);
 }
+
+/**
+ * Implements hook_page_build().
+ * 
+ * This adds the tracking code into the page between the body tags.
+ */
+function freshdesk_page_build(&$page) {
+  // Is the Freshdesk JS popup widget enabled?
+  if (!empty(variable_get('freshdesk_widget_popup_enable', 0))) {
+    $freshdesk_popup_widget_options = array();
+    // Load options and set defaults here in they have not been set in the admin panel.
+    $freshdesk_popup_widget_options['freshdesk_url'] = variable_get('freshdesk_url', 'https://example.freshdes.com');
+    $freshdesk_popup_widget_options['freshdesk_widget_popup_form_responsive'] = variable_get('freshdesk_widget_popup_form_responsive', 1);
+    $freshdesk_popup_widget_options['freshdesk_widget_popup_type'] = variable_get('freshdesk_widget_popup_type', 'button');
+    $freshdesk_popup_widget_options['freshdesk_widget_popup_type_attribute'] = variable_get('freshdesk_widget_popup_type_attribute');
+    $freshdesk_popup_widget_options['freshdesk_widget_popup_position'] = variable_get('freshdesk_widget_popup_position', 4);
+    $freshdesk_popup_widget_options['freshdesk_widget_popup_offset'] = variable_get('freshdesk_widget_popup_offset', 235);
+    $freshdesk_popup_widget_options['freshdesk_widget_popup_form_heading'] = variable_get('freshdesk_widget_popup_form_heading', t('Help and Support'));
+    $freshdesk_popup_widget_options['freshdesk_widget_popup_form_submit_message'] = variable_get('freshdesk_widget_popup_form_submit_message', t('Thank you for your feedback'));
+    $freshdesk_popup_widget_options['freshdesk_widget_popup_form_height'] = variable_get('freshdesk_widget_popup_form_height', 500);
+    $freshdesk_popup_widget_options['freshdesk_widget_popup_form_screenshot'] = variable_get('freshdesk_widget_popup_form_screenshot', 1);
+    $freshdesk_popup_widget_options['freshdesk_widget_popup_form_attach'] = variable_get('freshdesk_widget_popup_form_attach', 1);
+    $freshdesk_popup_widget_options['freshdesk_widget_popup_form_search'] = variable_get('freshdesk_widget_popup_form_search', 1);
+    $markup = theme('', $freshdesk_popup_widget_options);
+    $page['page_bottom']['freshdesk_widget_popup'] = array(
+      '#weight' => 65,
+      '#markup' => $markup,
+    );
+  }
+}
