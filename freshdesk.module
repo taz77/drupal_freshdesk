@@ -106,10 +106,38 @@ function freshdesk_page_build(&$page) {
     $freshdesk_popup_widget_options['freshdesk_widget_popup_form_screenshot'] = variable_get('freshdesk_widget_popup_form_screenshot', 1);
     $freshdesk_popup_widget_options['freshdesk_widget_popup_form_attach'] = variable_get('freshdesk_widget_popup_form_attach', 1);
     $freshdesk_popup_widget_options['freshdesk_widget_popup_form_search'] = variable_get('freshdesk_widget_popup_form_search', 1);
-    $markup = theme('', $freshdesk_popup_widget_options);
+    $markup = theme('freshdesk_popup', $freshdesk_popup_widget_options);
     $page['page_bottom']['freshdesk_widget_popup'] = array(
       '#weight' => 65,
       '#markup' => $markup,
     );
   }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function freshdesk_theme() {
+  $base = array(
+    'path' => drupal_get_path('module', 'freshdesk') . '/templates',
+  );
+  $items['freshdesk_popup'] = array(
+    'variables' => array(
+      'freshdesk_url' => NULL,
+      'freshdesk_widget_popup_form_responsive' => NULL,
+      'freshdesk_widget_popup_type' => NULL,
+      'freshdesk_widget_popup_type_attribute' => NULL,
+      'freshdesk_widget_popup_position' => NULL,
+      'freshdesk_widget_popup_offset' => NULL,
+      'freshdesk_widget_popup_form_heading' => NULL,
+      'freshdesk_widget_popup_form_submit_message' => NULL,
+      'freshdesk_widget_popup_form_height' => NULL,
+      'freshdesk_widget_popup_form_screenshot' => NULL,
+      'freshdesk_widget_popup_form_attach' => NULL,
+      'freshdesk_widget_popup_form_search' => NULL,
+    ),
+    'template' => 'freshdesk_widget_popup',
+  ) + $base;
+
+  return $items;
 }
