@@ -4,13 +4,6 @@
  * Freshbook template for popup feedback widget.
  */
 
-// Setting button text based on popup type and the attribute variable.
-if ($freshdesk_widget_popup_type == 'text') {
-  $btext = $freshdesk_widget_popup_type_attribute;
-}
-else {
-  $btext = 'Support';
-}
 // We must built the query string based on options to insert into the JS.
 $qsting = '&widgetType=popup';
 if (empty($freshdesk_widget_popup_form_responsive)) {
@@ -31,18 +24,28 @@ if (empty($freshdesk_widget_popup_form_attach)) {
 if (empty($freshdesk_widget_popup_form_search)) {
   $qsting .= '&searchArea=no';
 }
+if ($freshdesk_widget_popup_type == 'button'){
+  $buttontype = '"buttonType": "image",';
+  $buttontype .= '"backgroundImage": "' . $freshdesk_widget_popup_type_attribute . '",';
+  $buttontype .= '"buttonText": "Support",';
+}
+if ($freshdesk_widget_popup_type == 'text'){
+  $buttontype = '"buttonType": "text",';
+  $buttontype .= '"buttonText": "' . $freshdesk_widget_popup_type_attribute . '",';
+}
 ?>
 
 <script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js"></script>
 <script type="text/javascript">
   FreshWidget.init("", {"queryString": "<?php print $qsting ?>",
     "widgetType": "popup",
-    "buttonType": "<?php print $freshdesk_widget_popup_type; ?>",
-    "buttonText": "<?php print $btext; ?>",
+    
+    <?php print $buttontype; ?>
+    
     "buttonColor": "white",
     "buttonBg": "#006063",
     "alignment": "<?php print $freshdesk_widget_popup_position; ?>",
     "offset": "<?php print $freshdesk_widget_popup_offset; ?>px",
     "formHeight": "<?php print $freshdesk_widget_popup_form_height; ?>",
-    "url": "<?php print $fresdesk_url; ?>"});
+    "url": "<?php print $freshdesk_url; ?>"});
 </script>
