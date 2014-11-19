@@ -90,8 +90,20 @@ function freshdesk_login_url($name, $email) {
  * This adds the tracking code into the page between the body tags.
  */
 function freshdesk_page_build(&$page) {
+  // Process path settings for the widgets.
+  $freshpaths = list_extract_allowed_values(variable_get('freshdesk_widget_popup_paths', ''), 'list_text', FALSE);
+  $path_match = FALSE;
+  foreach ($freshpaths as $items) {
+    // $paths = $code['paths'];
+    $path = drupal_strtolower(drupal_get_path_alias($_GET['q']));
+    // Compare the lowercase internal and lowercase path alias (if any).
+    $path_match = drupal_match_path($path, $items);
+    if ($path != $_GET['q']) {
+      $path_match = $path_match || drupal_match_path($_GET['q'], $items);
+    }
+  }
   // Is the Freshdesk JS popup widget enabled?
-  if (!empty(variable_get('freshdesk_widget_popup_enable', 0))) {
+  if (!empty(variable_get('freshdesk_widget_popup_enable', 0)) && empty($path_match)) {
     $freshdesk_popup_widget_options = array();
     // Load options and set defaults here in they have not been set in the admin panel.
     $freshdesk_popup_widget_options['freshdesk_url'] = variable_get('freshdesk_url', 'https://example.freshdes.com');
@@ -137,7 +149,7 @@ function freshdesk_theme() {
       'freshdesk_widget_popup_form_search' => NULL,
     ),
     'template' => 'freshdesk_widget_popup',
-  ) + $base;
+    ) + $base;
 
   return $items;
 }

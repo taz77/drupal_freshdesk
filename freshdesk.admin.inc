@@ -55,11 +55,6 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     '#markup' => t('This will allow you to enable and customize the Freshdesk JS popup widget. Currently this turns on the popup site wide.'),
     '#suffix' => '</span>',
   );
-  $form['intro1'] = array(
-    '#prefix' => '<div style="font-size: 1.8em;">',
-    '#markup' => t('This is unfinished at the moment.'),
-    '#suffix' => '</div>',
-  );
   $form['freshdesk_widget_popup_control'] = array(
     '#type' => 'fieldset',
     '#title' => t('Popup control settings'),
@@ -200,7 +195,15 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     '#title' => t('Allow users to search articles?'),
     '#default_value' => variable_get('freshdesk_widget_popup_form_search', 1),
   );
-
+  $form['freshdesk_widget_popup_paths'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Paths'),
+    '#default_value' => variable_get('freshdesk_widget_popup_paths', ''),
+    '#rows' => 8,
+    '#cols' => 128,
+    '#required' => FALSE,
+    '#description' => t('A list of paths to exclude from the displaying the popup widget. Each separated by a new line.'),
+  );
   $form['information'] = array(
     '#markup' => t('We only implement the SSL version of the form for this module. So there is no switch for SSL.')
   );
