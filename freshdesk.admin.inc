@@ -220,12 +220,39 @@ function freshdesk_admin_widget_embed($form, &$form_state) {
     '#markup' => t('This will allow you to enable and customize the Freshdesk embed widget and apply it to the bottom of pages'),
     '#suffix' => '</div>',
   );
-  $form['intro1'] = array(
-    '#prefix' => '<div style="font-size: 1.8em;">',
-    '#markup' => t('This is unfinished at the moment.'),
-    '#suffix' => '</div>',
+  $form['freshdesk_widget_embed_customize_form']['freshdesk_widget_embed_form_heading'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Form Heading'),
+    '#default_value' => variable_get('freshdesk_widget_embed_form_heading', 'Help and Support'),
+    '#size' => 120,
   );
-
+  $form['freshdesk_widget_embed_customize_form']['freshdesk_widget_embed_form_submit_message'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Submit Message'),
+    '#default_value' => variable_get('freshdesk_widget_embed_form_submit_message', 'Thank you for your feedback'),
+    '#rows' => 2,
+    '#cols' => 100,
+  );
+  $form['freshdesk_widget_embed_customize_form']['freshdesk_widget_embed_form_height'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Form Height'),
+    '#description' => t('Height of the form in pixels.'),
+    '#default_value' => variable_get('freshdesk_widget_embed_form_height', 500),
+    '#size' => 5,
+  );
+  $form['freshdesk_widget_embed_customize_form']['freshdesk_widget_embed_form_search'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Allow users to search articles?'),
+    '#default_value' => variable_get('freshdesk_widget_embed_form_search', 1),
+  );
+  $form['freshdesk_widget_embed_customize_form']['freshdesk_widget_embed_form_attach'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Allow users to attach files?'),
+    '#default_value' => variable_get('freshdesk_widget_embed_form_attach', 1),
+  );
+  $form['information'] = array(
+    '#markup' => t('We only implement the SSL version of the form for this module. So there is no switch for SSL.')
+  );
   return system_settings_form($form);
 }
 

@@ -150,6 +150,16 @@ function freshdesk_theme() {
     ),
     'template' => 'freshdesk_widget_popup',
     ) + $base;
+  $items['freshdesk_embed'] = array(
+    'variables' => array(
+      'freshdesk_url' => NULL,
+      'freshdesk_widget_embed_form_search' => NULL,
+      'freshdesk_widget_embed_form_attach' => NULL,
+      'freshdesk_widget_embed_form_height' => NULL,
+
+    ),
+    'template' => 'freshdesk_widget_embed',
+    ) + $base;
 
   return $items;
 }

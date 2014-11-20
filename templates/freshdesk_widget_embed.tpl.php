@@ -1,0 +1,24 @@
+<?php
+/**
+ * @file
+ * Freshbook template for embeded feedback widget.
+ */
+// We must built the query string based on options to insert into the embeded form.
+$iframesrc = $freshdesk_url . '/widgets/feedback_widget/new?';
+$iframesrc .= '&widgetType=embedded&screenshot=no';
+if (empty($freshdesk_widget_embed_form_search)) {
+  $iframesrc .= '&searchArea=no';
+}
+if (empty($freshdesk_widget_embed_form_attach)) {
+  $iframesrc .= '&attachFile=no';
+}
+?>
+
+<script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js"></script>
+<style type="text/css" media="screen, projection">
+  @import url(https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.css); 
+</style> 
+<iframe class="freshwidget-embedded-form" id="freshwidget-embedded-form" src="<?php print $iframesrc; ?>" scrolling="no" height="<?php print $freshdesk_widget_embed_form_height; ?>px" width="100%" frameborder="0" >
+</iframe>
+
+
