@@ -10,6 +10,8 @@
  */
 function freshdesk_uninstall() {
   // Delete all the freshdesk variables and then clear the variable cache.
-  db_query("DELETE FROM {variable} WHERE name LIKE 'freshdesk_%'");
+  db_delete('variable')
+    ->condition('name', 'freshdesk_%', 'LIKE')
+    ->execute();
   cache_clear_all('variables', 'cache');
 }

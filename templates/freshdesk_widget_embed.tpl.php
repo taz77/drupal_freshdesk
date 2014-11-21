@@ -20,5 +20,3 @@ endif;
 </style> 
 <iframe class="freshwidget-embedded-form" id="freshwidget-embedded-form" src="<?php print $iframesrc; ?>" scrolling="no" height="<?php print $freshdesk_widget_embed_form_height; ?>px" width="100%" frameborder="0" >
 </iframe>
-
-
