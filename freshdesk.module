@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Module file for Freshbook Module
+ * Module file for Freshbook Module.
  */
 
 /**
@@ -12,7 +12,7 @@ function freshdesk_menu() {
   $items = array();
   $items['admin/config/services/freshdesk'] = array(
     'title' => 'Freshdesk Admin Page',
-    'description' => 'Freshdesk Adminstrative Settings',
+    'description' => 'Freshdesk Administrative Settings',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('freshdesk_admin_account'),
     'access arguments' => array('administer freshdesk module'),
@@ -67,7 +67,7 @@ function freshdesk_permission() {
 }
 
 /**
- * Page call back for Freshdesk SSO
+ * Page call back for Freshdesk SSO.
  */
 function _freshdesk_support_portal() {
   global $user;
@@ -91,7 +91,8 @@ function freshdesk_login_url($name, $email) {
  */
 function freshdesk_page_build(&$page) {
   // Process path settings for the widgets.
-  $freshpaths = list_extract_allowed_values(variable_get('freshdesk_widget_popup_paths', ''), 'list_text', FALSE);
+  $configpaths = variable_get('freshdesk_widget_popup_paths', '');
+  $freshpaths = list_extract_allowed_values($configpaths, 'list_text', FALSE);
   $path_match = FALSE;
   foreach ($freshpaths as $items) {
     // $paths = $code['paths'];
@@ -103,7 +104,8 @@ function freshdesk_page_build(&$page) {
     }
   }
   // Is the Freshdesk JS popup widget enabled?
-  if (!empty(variable_get('freshdesk_widget_popup_enable', 0)) && empty($path_match)) {
+  $fresh_js = variable_get('freshdesk_widget_popup_enable', 0);
+  if (!empty($fresh_js) && empty($path_match)) {
     $freshdesk_popup_widget_options = array();
     // Load options and set defaults here in they have not been set in the admin panel.
     $freshdesk_popup_widget_options['freshdesk_url'] = variable_get('freshdesk_url', 'https://example.freshdesk.com');
@@ -175,8 +177,8 @@ function freshdesk_token_info() {
   );
   // Add a token within the new token type.
   $items['tokens']['freshdesk']['freshdeskembed'] = array(
-    'name' => t('Freshdesk Embeded Form'),
-    'description' => t('iFrame embeded form for Freshdesk.'),
+    'name' => t('Freshdesk Embedded Form'),
+    'description' => t('iFrame embedded form for Freshdesk.'),
   );
   return $items;
 }

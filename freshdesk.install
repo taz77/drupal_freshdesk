@@ -2,11 +2,11 @@
 
 /**
  * @file
- * Install file for Freshbook Module
+ * Install file for Freshbook Module.
  */
 
 /**
- * Implements hook_uninstall()
+ * Implements hook_uninstall().
  */
 function freshdesk_uninstall() {
   // Delete all the freshdesk variables and then clear the variable cache.

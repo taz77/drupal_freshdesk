@@ -35,9 +35,9 @@ Step 5)
 
   Go to "/admin/people/permissions" to configure permissions.
 
-EMBEDED FORM
+EMBEDDED FORM
 
-The embeded form (iframe) works via a token so it can be put anywhere. You are
+The embedded form (iframe) works via a token so it can be put anywhere. You are
 free to choose whatever method that you would like to display the token.
 
 If you want a quick and easy way to put it into content. You can download the
