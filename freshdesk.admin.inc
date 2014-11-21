@@ -2,11 +2,11 @@
 
 /**
  * @file
- * Provides admin settings form(s) for Freshdesk module
+ * Provides admin settings form(s) for Freshdesk module.
  */
 
 /**
- * The form to provide admin settings for the SS Newsletter Module
+ * The form to provide admin settings for the SS Newsletter Module.
  */
 function freshdesk_admin_account($form, &$form_state) {
 
@@ -39,14 +39,14 @@ function freshdesk_admin_account($form, &$form_state) {
     '#size' => '100',
     '#title' => t('SSO Secret Key'),
     '#default_value' => variable_get('freshdesk_sso_key', ''),
-    '#description' => t('Instructions on obtaining this key are available on Freshdesk support <a href="@url">page</a>', array('@url' => 'https://support.freshdesk.com/support/solutions/articles/31166-single-sign-on-remote-authentication-in-freshdesk'))
+    '#description' => t('Instructions on obtaining this key are available on Freshdesk support <a href="@url">page</a>', array('@url' => 'https://support.freshdesk.com/support/solutions/articles/31166-single-sign-on-remote-authentication-in-freshdesk')),
   );
 
   return system_settings_form($form);
 }
 
 /**
- * The form to provide Feedback Popup widget
+ * The form to provide Feedback Popup widget.
  */
 function freshdesk_admin_widget_popup($form, &$form_state) {
   $form = array();
@@ -114,8 +114,6 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     $att_title = t('Select Type First');
     $att_description = '';
   }
-
-
   $form['freshdesk_widget_popup_button_type']['freshdesk_widget_popup_type_attribute'] = array(
     '#type' => 'textfield',
     '#title' => $att_title,
@@ -205,13 +203,13 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     '#description' => t('A list of paths to exclude from the displaying the popup widget. Each separated by a new line.'),
   );
   $form['information'] = array(
-    '#markup' => t('We only implement the SSL version of the form for this module. So there is no switch for SSL.')
+    '#markup' => t('We only implement the SSL version of the form for this module. So there is no switch for SSL.'),
   );
   return system_settings_form($form);
 }
 
 /**
- * The form to provide Feedback Embed widget
+ * The form to provide Feedback Embed widget.
  */
 function freshdesk_admin_widget_embed($form, &$form_state) {
   $form = array();
@@ -251,7 +249,7 @@ function freshdesk_admin_widget_embed($form, &$form_state) {
     '#default_value' => variable_get('freshdesk_widget_embed_form_attach', 1),
   );
   $form['information'] = array(
-    '#markup' => t('We only implement the SSL version of the form for this module. So there is no switch for SSL.')
+    '#markup' => t('We only implement the SSL version of the form for this module. So there is no switch for SSL.'),
   );
   return system_settings_form($form);
 }

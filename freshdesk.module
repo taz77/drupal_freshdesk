@@ -86,7 +86,7 @@ function freshdesk_login_url($name, $email) {
 
 /**
  * Implements hook_page_build().
- * 
+ *
  * This adds the tracking code into the page between the body tags.
  */
 function freshdesk_page_build(&$page) {
@@ -185,7 +185,7 @@ function freshdesk_token_info() {
 
 /**
  * Implements hook_tokens().
- * 
+ *
  * This will take the tokens and process them to an markup for iFrame.
  */
 function freshdesk_tokens($type, $tokens, array $data = array(), array $options = array()) {
@@ -195,7 +195,7 @@ function freshdesk_tokens($type, $tokens, array $data = array(), array $options 
       switch ($name) {
         case 'freshdeskembed':
           $freshdesk_embed_widget_options = array();
-          // Load options and set defaults here in they have not been set in the admin panel.
+          // Load options and set defaults.
           $freshdesk_embed_widget_options['freshdesk_url'] = variable_get('freshdesk_url', 'https://example.freshdesk.com');
           $freshdesk_embed_widget_options['freshdesk_widget_embed_form_height'] = variable_get('freshdesk_widget_embed_form_height', 500);
           $freshdesk_embed_widget_options['freshdesk_widget_embed_form_attach'] = variable_get('freshdesk_widget_embed_form_attach', 1);

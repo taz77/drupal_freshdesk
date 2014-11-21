@@ -6,12 +6,12 @@
 // We must built the query string based on options to insert into the embedded form.
 $iframesrc = $freshdesk_url . '/widgets/feedback_widget/new?';
 $iframesrc .= '&widgetType=embedded&screenshot=no';
-if (empty($freshdesk_widget_embed_form_search)) {
+if (empty($freshdesk_widget_embed_form_search)):
   $iframesrc .= '&searchArea=no';
-}
-if (empty($freshdesk_widget_embed_form_attach)) {
+endif;
+if (empty($freshdesk_widget_embed_form_attach)):
   $iframesrc .= '&attachFile=no';
-}
+endif;
 ?>
 
 <script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js"></script>

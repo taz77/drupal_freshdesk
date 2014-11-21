@@ -6,33 +6,33 @@
 
 // We must built the query string based on options to insert into the JS.
 $qsting = '&widgetType=popup';
-if (empty($freshdesk_widget_popup_form_responsive)) {
+if (empty($freshdesk_widget_popup_form_responsive)):
   $qsting .= '&responsive=no';
-}
-if (!empty($freshdesk_widget_popup_form_heading)) {
+endif;
+if (!empty($freshdesk_widget_popup_form_heading)):
   $qsting .= '&formTitle=' . $freshdesk_widget_popup_form_heading;
-}
-if (!empty($freshdesk_widget_popup_form_submit_message)) {
+endif;
+if (!empty($freshdesk_widget_popup_form_submit_message)):
   $qsting .= '&submitThanks=' . $freshdesk_widget_popup_form_submit_message;
-}
-if (empty($freshdesk_widget_popup_form_screenshot)) {
+endif;
+if (empty($freshdesk_widget_popup_form_screenshot)):
   $qsting .= '&screenshot=no';
-}
-if (empty($freshdesk_widget_popup_form_attach)) {
+endif;
+if (empty($freshdesk_widget_popup_form_attach)):
   $qsting .= '&attachFile=no';
-}
-if (empty($freshdesk_widget_popup_form_search)) {
+endif;
+if (empty($freshdesk_widget_popup_form_search)):
   $qsting .= '&searchArea=no';
-}
-if ($freshdesk_widget_popup_type == 'button'){
+endif;
+if ($freshdesk_widget_popup_type == 'button'):
   $buttontype = '"buttonType": "image",';
   $buttontype .= '"backgroundImage": "' . $freshdesk_widget_popup_type_attribute . '",';
   $buttontype .= '"buttonText": "Support",';
-}
-if ($freshdesk_widget_popup_type == 'text'){
+endif;
+if ($freshdesk_widget_popup_type == 'text'):
   $buttontype = '"buttonType": "text",';
   $buttontype .= '"buttonText": "' . $freshdesk_widget_popup_type_attribute . '",';
-}
+endif;
 ?>
 
 <script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js"></script>
