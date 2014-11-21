@@ -52,7 +52,7 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
   $form = array();
   $form['intro'] = array(
     '#prefix' => '<span style="font-size: 1.2em;">',
-    '#markup' => t('This will allow you to enable and customize the Freshdesk JS popup widget. Currently this turns on the popup site wide.'),
+    '#markup' => t('This will allow you to enable and customize the Freshdesk JS popup widget. Currently this turns on the popup site wide. Changes to this form will require a clearing of the template cache.'),
     '#suffix' => '</span>',
   );
   $form['freshdesk_widget_popup_control'] = array(
@@ -217,7 +217,7 @@ function freshdesk_admin_widget_embed($form, &$form_state) {
   $form = array();
   $form['intro'] = array(
     '#prefix' => '<div style="font-size: 1.2em;">',
-    '#markup' => t('This will allow you to enable and customize the Freshdesk embed widget and apply it to the bottom of pages'),
+    '#markup' => t('This will allow you to enable and customize the Freshdesk embed widget and apply it to the bottom of pages. Changes to this form will require a clearing of the template cache.'),
     '#suffix' => '</div>',
   );
   $form['freshdesk_widget_embed_customize_form']['freshdesk_widget_embed_form_heading'] = array(
@@ -236,7 +236,7 @@ function freshdesk_admin_widget_embed($form, &$form_state) {
   $form['freshdesk_widget_embed_customize_form']['freshdesk_widget_embed_form_height'] = array(
     '#type' => 'textfield',
     '#title' => t('Form Height'),
-    '#description' => t('Height of the form in pixels.'),
+    '#description' => t('Height of the form in pixels. Test these settings based on the options you choose to display as you may need to make this larger or smaller.'),
     '#default_value' => variable_get('freshdesk_widget_embed_form_height', 500),
     '#size' => 5,
   );

@@ -106,7 +106,7 @@ function freshdesk_page_build(&$page) {
   if (!empty(variable_get('freshdesk_widget_popup_enable', 0)) && empty($path_match)) {
     $freshdesk_popup_widget_options = array();
     // Load options and set defaults here in they have not been set in the admin panel.
-    $freshdesk_popup_widget_options['freshdesk_url'] = variable_get('freshdesk_url', 'https://example.freshdes.com');
+    $freshdesk_popup_widget_options['freshdesk_url'] = variable_get('freshdesk_url', 'https://example.freshdesk.com');
     $freshdesk_popup_widget_options['freshdesk_widget_popup_form_responsive'] = variable_get('freshdesk_widget_popup_form_responsive', 1);
     $freshdesk_popup_widget_options['freshdesk_widget_popup_type'] = variable_get('freshdesk_widget_popup_type', 'button');
     $freshdesk_popup_widget_options['freshdesk_widget_popup_type_attribute'] = variable_get('freshdesk_widget_popup_type_attribute');
@@ -156,10 +156,54 @@ function freshdesk_theme() {
       'freshdesk_widget_embed_form_search' => NULL,
       'freshdesk_widget_embed_form_attach' => NULL,
       'freshdesk_widget_embed_form_height' => NULL,
-
     ),
     'template' => 'freshdesk_widget_embed',
     ) + $base;
 
   return $items;
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function freshdesk_token_info() {
+  $items = array();
+  // Add a Freshdesk token type.
+  $items['types']['freshdesk'] = array(
+    'name' => t('Freshdesk'),
+    'description' => t('Tokens related to Freshdesk.'),
+  );
+  // Add a token within the new token type.
+  $items['tokens']['freshdesk']['freshdeskembed'] = array(
+    'name' => t('Freshdesk Embeded Form'),
+    'description' => t('iFrame embeded form for Freshdesk.'),
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_tokens().
+ * 
+ * This will take the tokens and process them to an markup for iFrame.
+ */
+function freshdesk_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  if ($type == 'freshdesk') {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'freshdeskembed':
+          $freshdesk_embed_widget_options = array();
+          // Load options and set defaults here in they have not been set in the admin panel.
+          $freshdesk_embed_widget_options['freshdesk_url'] = variable_get('freshdesk_url', 'https://example.freshdesk.com');
+          $freshdesk_embed_widget_options['freshdesk_widget_embed_form_height'] = variable_get('freshdesk_widget_embed_form_height', 500);
+          $freshdesk_embed_widget_options['freshdesk_widget_embed_form_attach'] = variable_get('freshdesk_widget_embed_form_attach', 1);
+          $freshdesk_embed_widget_options['freshdesk_widget_embed_form_search'] = variable_get('freshdesk_widget_embed_form_search', 1);
+          $markup = theme('freshdesk_embed', $freshdesk_embed_widget_options);
+          // We replace the token with the embed code from the template.
+          $replacements[$original] = $markup;
+          break;
+      }
+    }
+  }
+  return $replacements;
 }
