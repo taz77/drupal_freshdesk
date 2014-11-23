@@ -249,7 +249,14 @@ function freshdesk_admin_widget_embed($form, &$form_state) {
     '#default_value' => variable_get('freshdesk_widget_embed_form_attach', 1),
   );
   $form['information'] = array(
+    '#prefix' => '<div style="font-size: 1.2em; margin-bottom: 20px; margin-top:20px;">',
     '#markup' => t('We only implement the SSL version of the form for this module. So there is no switch for SSL.'),
+    '#suffix' => '</div>',
+  );
+  $form['tokennotice'] = array(
+    '#prefix' => '<div style="font-size: 1.2em;">',
+    '#markup' => t('This module creates a token [freshdesk:freshdeskembed] that can be used through the token system. One method is to use the module') . ' ' . l('Token Filter', 'https://www.drupal.org/project/token_filter') . ' ' . t('to include this form into content at places you designate in the content of a node.'),
+    '#suffix' => '</div>',
   );
   return system_settings_form($form);
 }
