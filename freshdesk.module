@@ -158,6 +158,8 @@ function freshdesk_theme() {
       'freshdesk_widget_embed_form_search' => NULL,
       'freshdesk_widget_embed_form_attach' => NULL,
       'freshdesk_widget_embed_form_height' => NULL,
+      'freshdesk_widget_embed_form_heading' => NULL,
+      'freshdesk_widget_embed_form_submit_message' => NULL,
     ),
     'template' => 'freshdesk_widget_embed',
     ) + $base;
@@ -200,6 +202,8 @@ function freshdesk_tokens($type, $tokens, array $data = array(), array $options 
           $freshdesk_embed_widget_options['freshdesk_widget_embed_form_height'] = variable_get('freshdesk_widget_embed_form_height', 500);
           $freshdesk_embed_widget_options['freshdesk_widget_embed_form_attach'] = variable_get('freshdesk_widget_embed_form_attach', 1);
           $freshdesk_embed_widget_options['freshdesk_widget_embed_form_search'] = variable_get('freshdesk_widget_embed_form_search', 1);
+          $freshdesk_embed_widget_options['freshdesk_widget_embed_form_heading'] = variable_get('freshdesk_widget_embed_form_heading', '');
+          $freshdesk_embed_widget_options['freshdesk_widget_embed_form_submit_message'] = variable_get('freshdesk_widget_embed_form_submit_message', '');
           $markup = theme('freshdesk_embed', $freshdesk_embed_widget_options);
           // We replace the token with the embed code from the template.
           $replacements[$original] = $markup;

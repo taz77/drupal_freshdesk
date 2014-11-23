@@ -12,6 +12,14 @@ endif;
 if (empty($freshdesk_widget_embed_form_attach)):
   $iframesrc .= '&attachFile=no';
 endif;
+if (!empty($freshdesk_widget_embed_form_submit_message)):
+  $freshdesk_widget_embed_form_submit_message = trim($freshdesk_widget_embed_form_submit_message);
+  $iframesrc .= '&submitThanks=' . str_replace(' ', '+', $freshdesk_widget_embed_form_submit_message);
+endif;
+if (!empty($freshdesk_widget_embed_form_heading)):
+  $freshdesk_widget_embed_form_heading = trim($freshdesk_widget_embed_form_heading);
+  $iframesrc .= '&formTitle=' . str_replace(' ', '+', $freshdesk_widget_embed_form_heading);
+endif;
 ?>
 
 <script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js"></script>
