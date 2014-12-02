@@ -95,7 +95,6 @@ function freshdesk_page_build(&$page) {
   $freshpaths = list_extract_allowed_values($configpaths, 'list_text', FALSE);
   $path_match = FALSE;
   foreach ($freshpaths as $items) {
-    // $paths = $code['paths'];
     $path = drupal_strtolower(drupal_get_path_alias($_GET['q']));
     // Compare the lowercase internal and lowercase path alias (if any).
     $path_match = drupal_match_path($path, $items);
