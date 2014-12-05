@@ -91,7 +91,7 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
       'wrapper' => 'replace_freshdesk_type_attribute',
     ),
   );
-  if (!empty(variable_get('freshdesk_widget_popup_type'))) {
+  if (variable_get('freshdesk_widget_popup_type')) {
     $popup_type = variable_get('freshdesk_widget_popup_type');
     switch ($popup_type) {
       case 'text':
