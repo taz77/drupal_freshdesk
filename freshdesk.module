@@ -91,15 +91,14 @@ function freshdesk_login_url($name, $email) {
  */
 function freshdesk_page_build(&$page) {
   // Process path settings for the widgets.
-  $configpaths = variable_get('freshdesk_widget_popup_paths', '');
+  $path = drupal_strtolower(drupal_get_path_alias($_GET['q']));
+  $configpaths = variable_get('freshdesk_widget_popup_paths');
   $freshpaths = list_extract_allowed_values($configpaths, 'list_text', FALSE);
   $path_match = FALSE;
   foreach ($freshpaths as $items) {
-    $path = drupal_strtolower(drupal_get_path_alias($_GET['q']));
     // Compare the lowercase internal and lowercase path alias (if any).
-    $path_match = drupal_match_path($path, $items);
-    if ($path != $_GET['q']) {
-      $path_match = $path_match || drupal_match_path($_GET['q'], $items);
+    if(!empty(drupal_match_path($path, $items))){
+      $path_match = TRUE;
     }
   }
   // Is the Freshdesk JS popup widget enabled?
