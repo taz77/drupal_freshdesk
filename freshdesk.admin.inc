@@ -202,6 +202,26 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     '#required' => FALSE,
     '#description' => t('A list of paths to exclude from the displaying the popup widget. Each separated by a new line.'),
   );
+  // Render the role overview.
+  $result = db_query('SELECT * FROM {role} ORDER BY name');
+
+  $form['freshdesk_widget_popup_roles_set']['freshdesk_widget_popup_roles'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Display of Widget for Roles'),
+    '#collapsible' => TRUE,
+    '#description' => t('Define what user roles should be given the popup widget.'),
+  );
+
+  foreach ($result as $role) {
+    // Can't use empty spaces in varname.
+    $role_name = $role->name;
+    $role_varname = str_replace(' ', '_', $role_name);
+    $form['freshdesk_widget_popup_roles_set']['freshdesk_widget_popup_roles']['freshdesk_widget_popup_roles_' . $role_varname] = array(
+      '#type' => 'checkbox',
+      '#title' => t($role_name),
+      '#default_value' => variable_get('freshdesk_widget_popup_roles_' . $role_varname, FALSE),
+    );
+  }
   $form['information'] = array(
     '#markup' => t('We only implement the SSL version of the form for this module. So there is no switch for SSL.'),
   );
