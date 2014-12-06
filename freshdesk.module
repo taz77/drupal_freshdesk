@@ -1,6 +1,6 @@
 <?php
 
-/**
+  /**
  * @file
  * Module file for Freshbook Module.
  */
@@ -101,9 +101,19 @@ function freshdesk_page_build(&$page) {
       $path_match = TRUE;
     }
   }
+  // Assertain who should be given the popup widget
+  global $user;
+  $trackable = 0;
+  if (is_array($user->roles)) {
+    foreach ($user->roles as $role) {
+      $role = str_replace(' ', '_', $role);
+      $trackable += variable_get('freshdesk_widget_popup_roles_' . $role, FALSE);
+    }
+  }
+
   // Is the Freshdesk JS popup widget enabled?
   $fresh_js = variable_get('freshdesk_widget_popup_enable', 0);
-  if (!empty($fresh_js) && empty($path_match)) {
+  if (!empty($fresh_js) && empty($path_match) && $trackable > 0) {
     $freshdesk_popup_widget_options = array();
     // Load options and set defaults here in they have not been set in the admin panel.
     $freshdesk_popup_widget_options['freshdesk_url'] = variable_get('freshdesk_url', 'https://example.freshdesk.com');
