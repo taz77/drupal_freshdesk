@@ -97,7 +97,7 @@ function freshdesk_page_build(&$page) {
   $path_match = FALSE;
   foreach ($freshpaths as $items) {
     // Compare the lowercase internal and lowercase path alias (if any).
-    if(!empty(drupal_match_path($path, $items))){
+    if(drupal_match_path($path, $items)){
       $path_match = TRUE;
     }
   }
