@@ -6,7 +6,7 @@
  */
 
 /**
- * The form to provide admin settings for the SS Newsletter Module.
+ * The form to provide admin settings for the Fresdesk Account Page.
  */
 function freshdesk_admin_account($form, &$form_state) {
 
