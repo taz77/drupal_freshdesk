@@ -39,9 +39,7 @@ endif;
 <script type="text/javascript">
   FreshWidget.init("", {"queryString": "<?php print $qsting ?>",
     "widgetType": "popup",
-    
     <?php print $buttontype; ?>
-    
     "buttonColor": "white",
     "buttonBg": "#006063",
     "alignment": "<?php print $freshdesk_widget_popup_position; ?>",
