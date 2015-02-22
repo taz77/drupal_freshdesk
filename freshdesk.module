@@ -1,6 +1,6 @@
 <?php
 
-  /**
+/**
  * @file
  * Module file for Freshbook Module.
  */
@@ -97,12 +97,14 @@ function freshdesk_page_build(&$page) {
   $path_match = FALSE;
   foreach ($freshpaths as $items) {
     // Compare the lowercase internal and lowercase path alias (if any).
-    if(drupal_match_path($path, $items)){
+    // Pass TRUE if we find a match.
+    if (!empty(drupal_match_path($path, $items))) {
       $path_match = TRUE;
     }
   }
   // Assertain who should be given the popup widget
   global $user;
+  // Default to no tracking.
   $trackable = 0;
   if (is_array($user->roles)) {
     foreach ($user->roles as $role) {
@@ -110,7 +112,6 @@ function freshdesk_page_build(&$page) {
       $trackable += variable_get('freshdesk_widget_popup_roles_' . $role, FALSE);
     }
   }
-
   // Is the Freshdesk JS popup widget enabled?
   $fresh_js = variable_get('freshdesk_widget_popup_enable', 0);
   if (!empty($fresh_js) && empty($path_match) && $trackable > 0) {
@@ -129,10 +130,8 @@ function freshdesk_page_build(&$page) {
     $freshdesk_popup_widget_options['freshdesk_widget_popup_form_attach'] = variable_get('freshdesk_widget_popup_form_attach', 1);
     $freshdesk_popup_widget_options['freshdesk_widget_popup_form_search'] = variable_get('freshdesk_widget_popup_form_search', 1);
     $markup = theme('freshdesk_popup', $freshdesk_popup_widget_options);
-    $page['page_bottom']['freshdesk_widget_popup'] = array(
-      '#weight' => 65,
-      '#markup' => $markup,
-    );
+    drupal_add_js('https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js', array('type' => 'external'));
+    drupal_add_js($markup, array('type' => 'inline', 'scope' => 'footer'));
   }
 }
 
@@ -159,7 +158,7 @@ function freshdesk_theme() {
       'freshdesk_widget_popup_form_search' => NULL,
     ),
     'template' => 'freshdesk_widget_popup',
-    ) + $base;
+      ) + $base;
   $items['freshdesk_embed'] = array(
     'variables' => array(
       'freshdesk_url' => NULL,
@@ -170,7 +169,7 @@ function freshdesk_theme() {
       'freshdesk_widget_embed_form_submit_message' => NULL,
     ),
     'template' => 'freshdesk_widget_embed',
-    ) + $base;
+      ) + $base;
 
   return $items;
 }

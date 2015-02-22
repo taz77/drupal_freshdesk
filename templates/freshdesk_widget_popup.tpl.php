@@ -3,7 +3,6 @@
  * @file
  * Freshbook template for popup feedback widget.
  */
-
 // We must built the query string based on options to insert into the JS.
 $qsting = '&widgetType=popup';
 if (empty($freshdesk_widget_popup_form_responsive)):
@@ -35,15 +34,14 @@ if ($freshdesk_widget_popup_type == 'text'):
 endif;
 ?>
 
-<script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js"></script>
-<script type="text/javascript">
-  FreshWidget.init("", {"queryString": "<?php print $qsting ?>",
-    "widgetType": "popup",
-    <?php print $buttontype; ?>
-    "buttonColor": "white",
-    "buttonBg": "#006063",
-    "alignment": "<?php print $freshdesk_widget_popup_position; ?>",
-    "offset": "<?php print $freshdesk_widget_popup_offset; ?>px",
-    "formHeight": "<?php print $freshdesk_widget_popup_form_height; ?>",
-    "url": "<?php print $freshdesk_url; ?>"});
-</script>
+FreshWidget.init("", {"queryString": "<?php print $qsting ?>",
+  "widgetType": "popup",
+  <?php print $buttontype; ?>
+  "buttonColor": "white",
+  "buttonBg": "#006063",
+  "alignment": "<?php print $freshdesk_widget_popup_position; ?>",
+  "offset": "<?php print $freshdesk_widget_popup_offset; ?>px",
+  "formHeight": "<?php print $freshdesk_widget_popup_form_height; ?>",
+  "url": "
+  <?php print $freshdesk_url; ?>"
+});

@@ -6,7 +6,7 @@
  */
 
 /**
- * The form to provide admin settings for the Fresdesk Account Page.
+ * The form to provide admin settings for the Freshdesk module.
  */
 function freshdesk_admin_account($form, &$form_state) {
 
