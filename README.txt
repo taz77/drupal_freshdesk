@@ -42,5 +42,19 @@ free to choose whatever method that you would like to display the token.
 
 If you want a quick and easy way to put it into content. You can download the
 module Token Filter https://www.drupal.org/project/token_filter
+
+SSO URL
+
+This module provides an SSO URL to allow customers to authenticate with your
+Drupal user database to access Freshdesk without creating an account. Currently
+the URL is fixed and cannot be changed. Path for the SSO link is 
+freshdesk/support/portal. If your website was sample.com the address would be
+http://sample.com/freshdesk/support/portal
+It is highly recommended this be run of SSL.
+
+To tell Freshdesk that you have SSO capability and to get your Shared Secret, go
+to your admin page in your account. Under general settings click "Security".
+Obtain the secret and setup the remote login URL and the remote logout URL. The
+login URL will be as above with the path freshdesk/support/portal.
 ____________________________________________________________________________
 http://www.fastglass.net
