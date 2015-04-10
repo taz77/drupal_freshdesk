@@ -41,6 +41,6 @@ FreshWidget.init("", {"queryString": "<?php print $qsting ?>",
   "buttonBg": "#006063",
   "alignment": "<?php print $freshdesk_widget_popup_position; ?>",
   "offset": "<?php print $freshdesk_widget_popup_offset; ?>px",
-  "formHeight": "<?php print $freshdesk_widget_popup_form_height; ?>",
+  "formHeight": "<?php print $freshdesk_widget_popup_form_height; ?>px",
   "url": "<?php print $freshdesk_url; ?>",
 });

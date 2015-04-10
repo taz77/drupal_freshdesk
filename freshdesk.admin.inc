@@ -150,6 +150,7 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     '#type' => 'textfield',
     '#title' => t('Offset'),
     '#description' => t('Offset distance from the left or top of the screen in pixels.'),
+    '#field_suffix' => t('px'),
     '#default_value' => variable_get('freshdesk_widget_popup_offset', 235),
     '#size' => 5,
   );
@@ -175,6 +176,7 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     '#type' => 'textfield',
     '#title' => t('Form Height'),
     '#description' => t('Height of the form in pixels.'),
+    '#field_suffix' => t('px'),
     '#default_value' => variable_get('freshdesk_widget_popup_form_height', 500),
     '#size' => 5,
   );
@@ -255,6 +257,7 @@ function freshdesk_admin_widget_embed($form, &$form_state) {
     '#type' => 'textfield',
     '#title' => t('Form Height'),
     '#description' => t('Height of the form in pixels. Test these settings based on the options you choose to display as you may need to make this larger or smaller.'),
+    '#field_suffix' => t('px'),
     '#default_value' => variable_get('freshdesk_widget_embed_form_height', 500),
     '#size' => 5,
   );
