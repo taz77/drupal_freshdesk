@@ -24,15 +24,10 @@ endif;
 if ($freshdesk_widget_embed_form_requester == 0):
   $iframesrc .= '&helpdesk_ticket[requester]=' . token_replace('[user:mail]', array('user' => $user));
   $iframesrc .= '&disable[requester]=true';
-  dpm('ARG');
 elseif (!empty($freshdesk_widget_embed_form_requester_value) && valid_email_address($freshdesk_widget_embed_form_requester_value)) :
   $iframesrc .= '&helpdesk_ticket[requester]=' . $freshdesk_widget_embed_form_requester_value;
   $iframesrc .= '&disable[requester]=true';
-  dpm('SHIT');
 endif;
-firep($freshdesk_widget_embed_form_requester, 'setting');
-firep($freshdesk_widget_embed_form_requester_value, 'Email value');
-firep($iframesrc, 'URL');
 ?>
 
 <script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js"></script>
