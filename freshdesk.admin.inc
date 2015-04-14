@@ -159,19 +159,17 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     '#title' => t('Customize Form'),
     '#collapsible' => FALSE,
   );
-
   $requester_value = array(
     0 => t('Pre-populated with the current user\'s e-mail address'),
     1 => t('Blank or pre-populated with a custom e-mail address'),
   );
-
   $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_requester'] = array(
     '#type' => 'radios',
     '#title' => t('Requester e-mail address'),
     '#default_value' => variable_get('freshdesk_widget_popup_form_requester'),
     '#options' => $requester_value,
+    '#description' => t('NOTE: Pre-populating the e-mail address will not allow the user to change the email address.'),
   );
- 
   $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_requester_value'] = array(
     '#type' => 'textfield',
     '#title' => t('Custom value'),
@@ -183,7 +181,6 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     ),
     '#description' => t('Leave blank to prompt the end-user for an e-mail address, or pre-populate with a custom e-mail address.'),
   );
-
   $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_heading'] = array(
     '#type' => 'textfield',
     '#title' => t('Form Heading'),
@@ -277,6 +274,28 @@ function freshdesk_admin_widget_embed($form, &$form_state) {
     '#default_value' => variable_get('freshdesk_widget_embed_form_submit_message', 'Thank you for your feedback'),
     '#rows' => 2,
     '#cols' => 100,
+  );
+  $requester_value = array(
+    0 => t('Pre-populated with the current user\'s e-mail address'),
+    1 => t('Blank or pre-populated with a custom e-mail address'),
+  );
+  $form['freshdesk_widget_embed_customize_form']['freshdesk_widget_embed_form_requester'] = array(
+    '#type' => 'radios',
+    '#title' => t('Requester e-mail address'),
+    '#default_value' => variable_get('freshdesk_widget_embed_form_requester'),
+    '#options' => $requester_value,
+    '#description' => t('NOTE: Pre-populating the e-mail address will not allow the user to change the email address.'),
+  );
+  $form['freshdesk_widget_embed_customize_form']['freshdesk_widget_embed_form_requester_value'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Custom value'),
+    '#default_value' => variable_get('freshdesk_widget_embed_form_requester_value'),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="freshdesk_widget_embed_form_requester"]' => array('value' => 1),
+      ),
+    ),
+    '#description' => t('Leave blank to prompt the end-user for an e-mail address, or pre-populate with a custom e-mail address.'),
   );
   $form['freshdesk_widget_embed_customize_form']['freshdesk_widget_embed_form_height'] = array(
     '#type' => 'textfield',

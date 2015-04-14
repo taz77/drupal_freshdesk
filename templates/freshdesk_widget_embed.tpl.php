@@ -4,6 +4,7 @@
  * Freshbook template for embedded feedback widget.
  */
 // We must built the query string based on options to insert into the embedded form.
+$iframesrc = '';
 $iframesrc = $freshdesk_url . '/widgets/feedback_widget/new?';
 $iframesrc .= '&widgetType=embedded&screenshot=no';
 if (empty($freshdesk_widget_embed_form_search)):
@@ -20,6 +21,18 @@ if (!empty($freshdesk_widget_embed_form_heading)):
   $freshdesk_widget_embed_form_heading = trim($freshdesk_widget_embed_form_heading);
   $iframesrc .= '&formTitle=' . str_replace(' ', '+', $freshdesk_widget_embed_form_heading);
 endif;
+if ($freshdesk_widget_embed_form_requester == 0):
+  $iframesrc .= '&helpdesk_ticket[requester]=' . token_replace('[user:mail]', array('user' => $user));
+  $iframesrc .= '&disable[requester]=true';
+  dpm('ARG');
+elseif (!empty($freshdesk_widget_embed_form_requester_value) && valid_email_address($freshdesk_widget_embed_form_requester_value)) :
+  $iframesrc .= '&helpdesk_ticket[requester]=' . $freshdesk_widget_embed_form_requester_value;
+  $iframesrc .= '&disable[requester]=true';
+  dpm('SHIT');
+endif;
+firep($freshdesk_widget_embed_form_requester, 'setting');
+firep($freshdesk_widget_embed_form_requester_value, 'Email value');
+firep($iframesrc, 'URL');
 ?>
 
 <script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js"></script>
