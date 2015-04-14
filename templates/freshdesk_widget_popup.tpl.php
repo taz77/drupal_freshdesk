@@ -4,24 +4,31 @@
  * Freshbook template for popup feedback widget.
  */
 // We must built the query string based on options to insert into the JS.
-$qsting = '&widgetType=popup';
+$qstring = '&widgetType=popup';
+if ($freshdesk_widget_popup_form_requester == 0):
+  $qstring .= '&helpdesk_ticket[requester]=' . token_replace('[user:mail]', array('user' => $user));
+  $qstring .= '&disable[requester]=true';
+elseif (!empty($freshdesk_widget_popup_form_requester_value) && valid_email_address($freshdesk_widget_popup_form_requester_value)) :
+  $qstring .= '&helpdesk_ticket[requester]=' . $freshdesk_widget_popup_form_requester_value;
+  $qstring .= '&disable[requester]=true';
+endif;
 if (empty($freshdesk_widget_popup_form_responsive)):
-  $qsting .= '&responsive=no';
+  $qstring .= '&responsive=no';
 endif;
 if (!empty($freshdesk_widget_popup_form_heading)):
-  $qsting .= '&formTitle=' . $freshdesk_widget_popup_form_heading;
+  $qstring .= '&formTitle=' . $freshdesk_widget_popup_form_heading;
 endif;
 if (!empty($freshdesk_widget_popup_form_submit_message)):
-  $qsting .= '&submitThanks=' . $freshdesk_widget_popup_form_submit_message;
+  $qstring .= '&submitThanks=' . $freshdesk_widget_popup_form_submit_message;
 endif;
 if (empty($freshdesk_widget_popup_form_screenshot)):
-  $qsting .= '&screenshot=no';
+  $qstring .= '&screenshot=no';
 endif;
 if (empty($freshdesk_widget_popup_form_attach)):
-  $qsting .= '&attachFile=no';
+  $qstring .= '&attachFile=no';
 endif;
 if (empty($freshdesk_widget_popup_form_search)):
-  $qsting .= '&searchArea=no';
+  $qstring .= '&searchArea=no';
 endif;
 if ($freshdesk_widget_popup_type == 'button'):
   $buttontype = '"buttonType": "image",';
@@ -34,7 +41,7 @@ if ($freshdesk_widget_popup_type == 'text'):
 endif;
 ?>
 
-FreshWidget.init("", {"queryString": "<?php print $qsting ?>",
+FreshWidget.init("", {"queryString": "<?php print $qstring ?>",
   "widgetType": "popup",
   <?php print $buttontype; ?>
   "buttonColor": "white",

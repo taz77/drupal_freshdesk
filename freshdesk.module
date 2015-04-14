@@ -123,6 +123,8 @@ function freshdesk_page_build(&$page) {
     $freshdesk_popup_widget_options['freshdesk_widget_popup_type_attribute'] = variable_get('freshdesk_widget_popup_type_attribute');
     $freshdesk_popup_widget_options['freshdesk_widget_popup_position'] = variable_get('freshdesk_widget_popup_position', 4);
     $freshdesk_popup_widget_options['freshdesk_widget_popup_offset'] = variable_get('freshdesk_widget_popup_offset', 235);
+    $freshdesk_popup_widget_options['freshdesk_widget_popup_form_requester'] = variable_get('freshdesk_widget_popup_form_requester', 0);
+    $freshdesk_popup_widget_options['freshdesk_widget_popup_form_requester_value'] = variable_get('freshdesk_widget_popup_form_requester_value');
     $freshdesk_popup_widget_options['freshdesk_widget_popup_form_heading'] = variable_get('freshdesk_widget_popup_form_heading', t('Help and Support'));
     $freshdesk_popup_widget_options['freshdesk_widget_popup_form_submit_message'] = variable_get('freshdesk_widget_popup_form_submit_message', t('Thank you for your feedback'));
     $freshdesk_popup_widget_options['freshdesk_widget_popup_form_height'] = variable_get('freshdesk_widget_popup_form_height', 500);
@@ -150,6 +152,8 @@ function freshdesk_theme() {
       'freshdesk_widget_popup_type_attribute' => NULL,
       'freshdesk_widget_popup_position' => NULL,
       'freshdesk_widget_popup_offset' => NULL,
+      'freshdesk_widget_popup_form_requester' => NULL,
+      'freshdesk_widget_popup_form_requester_value' => NULL,
       'freshdesk_widget_popup_form_heading' => NULL,
       'freshdesk_widget_popup_form_submit_message' => NULL,
       'freshdesk_widget_popup_form_height' => NULL,

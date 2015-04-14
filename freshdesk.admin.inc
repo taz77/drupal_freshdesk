@@ -159,6 +159,31 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     '#title' => t('Customize Form'),
     '#collapsible' => FALSE,
   );
+
+  $requester_value = array(
+    0 => t('Pre-populated with the current user\'s e-mail address'),
+    1 => t('Blank or pre-populated with a custom e-mail address'),
+  );
+
+  $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_requester'] = array(
+    '#type' => 'radios',
+    '#title' => t('Requester e-mail address'),
+    '#default_value' => variable_get('freshdesk_widget_popup_form_requester'),
+    '#options' => $requester_value,
+  );
+ 
+  $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_requester_value'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Custom value'),
+    '#default_value' => variable_get('freshdesk_widget_popup_form_requester_value'),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="freshdesk_widget_popup_form_requester"]' => array('value' => 1),
+      ),
+    ),
+    '#description' => t('Leave blank to prompt the end-user for an e-mail address, or pre-populate with a custom e-mail address.'),
+  );
+
   $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_heading'] = array(
     '#type' => 'textfield',
     '#title' => t('Form Heading'),
