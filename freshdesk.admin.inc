@@ -168,7 +168,6 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     '#title' => t('Requester e-mail address'),
     '#default_value' => variable_get('freshdesk_widget_popup_form_requester'),
     '#options' => $requester_value,
-    '#description' => t('NOTE: Pre-populating the e-mail address will not allow the user to change the email address.'),
   );
   $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_requester_value'] = array(
     '#type' => 'textfield',
@@ -180,6 +179,12 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
       ),
     ),
     '#description' => t('Leave blank to prompt the end-user for an e-mail address, or pre-populate with a custom e-mail address.'),
+  );
+  $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_requester_disable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Disable Requester Field'),
+    '#default_value' => variable_get('freshdesk_widget_popup_form_requester_disable', 0),
+    '#description' => t('If you enable this, the user will not be able to change the requester email addresss on the ticket.'),
   );
   $form['freshdesk_widget_popup_customize_form']['freshdesk_widget_popup_form_heading'] = array(
     '#type' => 'textfield',
@@ -284,7 +289,6 @@ function freshdesk_admin_widget_embed($form, &$form_state) {
     '#title' => t('Requester e-mail address'),
     '#default_value' => variable_get('freshdesk_widget_embed_form_requester'),
     '#options' => $requester_value,
-    '#description' => t('NOTE: Pre-populating the e-mail address will not allow the user to change the email address.'),
   );
   $form['freshdesk_widget_embed_customize_form']['freshdesk_widget_embed_form_requester_value'] = array(
     '#type' => 'textfield',
@@ -296,6 +300,12 @@ function freshdesk_admin_widget_embed($form, &$form_state) {
       ),
     ),
     '#description' => t('Leave blank to prompt the end-user for an e-mail address, or pre-populate with a custom e-mail address.'),
+  );
+  $form['freshdesk_widget_embed_customize_form']['freshdesk_widget_embed_form_requester_disable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Disable Requester Field'),
+    '#default_value' => variable_get('freshdesk_widget_embed_form_requester_disable', 0),
+    '#description' => t('If you enable this, the user will not be able to change the requester email addresss on the ticket.'),
   );
   $form['freshdesk_widget_embed_customize_form']['freshdesk_widget_embed_form_height'] = array(
     '#type' => 'textfield',
