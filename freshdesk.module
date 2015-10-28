@@ -67,11 +67,46 @@ function freshdesk_permission() {
 }
 
 /**
+ * Implements hook_block_info().
+ */
+function freshdesk_block_info() {
+  $blocks = array();
+  $blocks['freshdesk'] = array(
+    'info' => t('Freshdesk SSO'),
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function freshdesk_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'freshdesk':
+      $block['subject'] = '';
+      $block['content'] = _freshdesk_support_portal();
+      break;
+  }
+  return $block;
+}
+
+/**
  * Page call back for Freshdesk SSO.
  */
 function _freshdesk_support_portal() {
   global $user;
-  header("Location: " . freshdesk_login_url($user->name, $user->mail));
+  $name = $user->name;
+  // Check to see if the profile2 module is installed, and if a user has a
+  // profile2, and if they have a first and last name field.
+  if (function_exists('profile2_load_by_user')) {
+    if ($loaded_user = profile2_load_by_user($user->uid)) {
+      if (isset($loaded_user['main']->field_first_name['und'][0]['value']) && isset($loaded_user['main']->field_last_name['und'][0]['value'])) {
+        $name = $loaded_user['main']->field_first_name['und'][0]['value'] . ' ' . $loaded_user['main']->field_last_name['und'][0]['value'];
+      }
+    }
+  }
+  header("Location: " . freshdesk_login_url($name, $user->mail));
   return TRUE;
 }
 
@@ -146,39 +181,39 @@ function freshdesk_theme() {
     'path' => drupal_get_path('module', 'freshdesk') . '/templates',
   );
   $items['freshdesk_popup'] = array(
-    'variables' => array(
-      'freshdesk_url' => NULL,
-      'freshdesk_widget_popup_form_responsive' => NULL,
-      'freshdesk_widget_popup_type' => NULL,
-      'freshdesk_widget_popup_type_attribute' => NULL,
-      'freshdesk_widget_popup_position' => NULL,
-      'freshdesk_widget_popup_offset' => NULL,
-      'freshdesk_widget_popup_form_requester' => NULL,
-      'freshdesk_widget_popup_form_requester_value' => NULL,
-      'freshdesk_widget_popup_form_heading' => NULL,
-      'freshdesk_widget_popup_form_submit_message' => NULL,
-      'freshdesk_widget_popup_form_height' => NULL,
-      'freshdesk_widget_popup_form_screenshot' => NULL,
-      'freshdesk_widget_popup_form_attach' => NULL,
-      'freshdesk_widget_popup_form_search' => NULL,
-      'freshdesk_widget_popup_form_requester_disable' => NULL,
-    ),
-    'template' => 'freshdesk_widget_popup',
-      ) + $base;
+      'variables' => array(
+        'freshdesk_url' => NULL,
+        'freshdesk_widget_popup_form_responsive' => NULL,
+        'freshdesk_widget_popup_type' => NULL,
+        'freshdesk_widget_popup_type_attribute' => NULL,
+        'freshdesk_widget_popup_position' => NULL,
+        'freshdesk_widget_popup_offset' => NULL,
+        'freshdesk_widget_popup_form_requester' => NULL,
+        'freshdesk_widget_popup_form_requester_value' => NULL,
+        'freshdesk_widget_popup_form_heading' => NULL,
+        'freshdesk_widget_popup_form_submit_message' => NULL,
+        'freshdesk_widget_popup_form_height' => NULL,
+        'freshdesk_widget_popup_form_screenshot' => NULL,
+        'freshdesk_widget_popup_form_attach' => NULL,
+        'freshdesk_widget_popup_form_search' => NULL,
+        'freshdesk_widget_popup_form_requester_disable' => NULL,
+      ),
+      'template' => 'freshdesk_widget_popup',
+    ) + $base;
   $items['freshdesk_embed'] = array(
-    'variables' => array(
-      'freshdesk_url' => NULL,
-      'freshdesk_widget_embed_form_search' => NULL,
-      'freshdesk_widget_embed_form_attach' => NULL,
-      'freshdesk_widget_embed_form_height' => NULL,
-      'freshdesk_widget_embed_form_heading' => NULL,
-      'freshdesk_widget_embed_form_submit_message' => NULL,
-      'freshdesk_widget_embed_form_requester' => NULL,
-      'freshdesk_widget_embed_form_requester_value' => NULL,
-      'freshdesk_widget_embed_form_requester_disable' => NULL,
-    ),
-    'template' => 'freshdesk_widget_embed',
-      ) + $base;
+      'variables' => array(
+        'freshdesk_url' => NULL,
+        'freshdesk_widget_embed_form_search' => NULL,
+        'freshdesk_widget_embed_form_attach' => NULL,
+        'freshdesk_widget_embed_form_height' => NULL,
+        'freshdesk_widget_embed_form_heading' => NULL,
+        'freshdesk_widget_embed_form_submit_message' => NULL,
+        'freshdesk_widget_embed_form_requester' => NULL,
+        'freshdesk_widget_embed_form_requester_value' => NULL,
+        'freshdesk_widget_embed_form_requester_disable' => NULL,
+      ),
+      'template' => 'freshdesk_widget_embed',
+    ) + $base;
 
   return $items;
 }
