@@ -2,6 +2,7 @@ name = Freshdesk Integration Module
 description = Integrate a Drupal website with Freshdesk ticket system.
 core = 7.x
 package = Freshdesk
+dependencies[] = list
 dependencies[] = token
 
 ; Information added by Drupal.org packaging script on 2015-04-14
