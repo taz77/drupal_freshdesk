@@ -124,9 +124,7 @@ function _freshdesk_support_portal() {
 function freshdesk_login_url($name, $email) {
   $secret = variable_get('freshdesk_sso_key', '');
   $base = variable_get('freshdesk_url', '');
-  // UTC timestamp.
-  $time = gmmktime();
-  return $base . '/login/sso/?name=' . urlencode($name) . '&timestamp=' . $time . '&email=' . urlencode($email) . '&hash=' . hash_hmac('md5', $name  . $secret . $email . $time, $secret);
+  return $base . '/login/sso/?name=' . urlencode($name) . '&timestamp=' . time() . '&email=' . urlencode($email) . '&hash=' . hash_hmac('md5', $name  . $secret . $email . $time, $secret);
 }
 
 
