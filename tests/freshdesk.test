@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * @file
+ * Contains tests for the Facebook Tracking Pixel module.
+ */
+
+/**
+ * Test case.
+ */
+class FacebookTrackingPixelTestCase extends DrupalWebTestCase {
