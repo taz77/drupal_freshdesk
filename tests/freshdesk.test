@@ -2,10 +2,38 @@
 
 /**
  * @file
- * Contains tests for the Facebook Tracking Pixel module.
+ * Contains tests for the Freshdesk module.
  */
 
 /**
  * Test case.
  */
-class FacebookTrackingPixelTestCase extends DrupalWebTestCase {
+class FreshdeskTestCase extends DrupalWebTestCase {
+
+
+  /**
+   * Generic web user.
+   *
+   * @var array
+   */
+  protected $webUser = [];
+
+  /**
+   * Adminstrative user.
+   *
+   * @var array
+   */
+  protected $adminUser = [];
+
+  /**
+   * {@inheritdoc}
+   */
+  function setUp() {
+    // Call the parent with an array of modules to enable for the test.
+    $modules[] = 'freshdesk';
+    parent::setUp($modules);
+
+
+  }
+
+}
