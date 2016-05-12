@@ -9,7 +9,18 @@
  * Test case.
  */
 class FreshdeskTestCase extends DrupalWebTestCase {
-  
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return [
+      'name' => 'Admin testing',
+      'description' => 'Basic configuration testing.',
+      'group' => 'Freshdesk',
+    ];
+  }
+
   /**
    * Generic web user.
    *
