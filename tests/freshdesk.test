@@ -33,6 +33,19 @@ class FreshdeskTestCase extends DrupalWebTestCase {
     $modules[] = 'freshdesk';
     parent::setUp($modules);
 
+    // Create an admin user and log them in.
+    $this->adminUser = $this->drupalCreateUser([
+      'access content',
+      'create page content',
+      'edit own page content',
+      'administer url aliases',
+      'create url aliases',
+      'administer users',
+      'administer permissions',
+    ]);
+    $this->drupalLogin($this->adminUser);
+    // Set the role as admin for the admin user just created.
+    $this->drupalPost('user/' . $this->adminUser->uid . '/edit', ['roles[3]' => TRUE], t('Save'));
 
   }
 
