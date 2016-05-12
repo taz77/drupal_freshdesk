@@ -14,7 +14,7 @@ env:
   global:
   - PATH="$PATH:$HOME/.composer/vendor/bin"
   - DRUPAL_TI_MODULE_NAME="freshdesk"
-  - DRUPAL_TI_SIMPLETEST_GROUP="Freshdesk"
+  - DRUPAL_TI_SIMPLETEST_GROUP="Freshdesk Module"
   - DRUPAL_TI_ENVIRONMENT="drupal-7"
   - DRUPAL_TI_DB="drupal_travis_db"
   - DRUPAL_TI_DB_URL="mysql://root:@127.0.0.1/drupal_travis_db"

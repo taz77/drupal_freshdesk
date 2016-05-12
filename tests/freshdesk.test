@@ -9,8 +9,7 @@
  * Test case.
  */
 class FreshdeskTestCase extends DrupalWebTestCase {
-
-
+  
   /**
    * Generic web user.
    *
