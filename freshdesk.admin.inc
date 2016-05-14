@@ -232,7 +232,7 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     '#description' => t('A list of paths to exclude from the displaying the popup widget. Each separated by a new line.'),
   );
   // Render the role overview.
-  $result = db_query('SELECT * FROM {role} ORDER BY name');
+  $result = db_query('SELECT * FROM {role} ORDER BY rid');
 
   $form['freshdesk_widget_popup_roles_set']['freshdesk_widget_popup_roles'] = array(
     '#type' => 'fieldset',
@@ -247,7 +247,7 @@ function freshdesk_admin_widget_popup($form, &$form_state) {
     $role_varname = str_replace(' ', '_', $role_name);
     $form['freshdesk_widget_popup_roles_set']['freshdesk_widget_popup_roles']['freshdesk_widget_popup_roles_' . $role_varname] = array(
       '#type' => 'checkbox',
-      '#title' => t($role_name),
+      '#title' => t(ucfirst($role_name)),
       '#default_value' => variable_get('freshdesk_widget_popup_roles_' . $role_varname, FALSE),
     );
   }
