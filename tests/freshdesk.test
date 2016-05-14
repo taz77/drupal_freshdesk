@@ -70,6 +70,7 @@ class FreshdeskTestCase extends DrupalWebTestCase {
 
   function FreshdeskAdminConfigPopupTest() {
     $edit = [];
+    $edit['freshdesk_widget_popup_enable'] = 1;
 
 
     $this->drupalPost('admin/config/services/freshdesk/widgetpopup', t('Save configuration'));
