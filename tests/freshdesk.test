@@ -42,7 +42,6 @@ class FreshdeskTestCase extends DrupalWebTestCase {
     // Call the parent with an array of modules to enable for the test.
     $modules[] = 'freshdesk';
     parent::setUp($modules);
-
     // Create an admin user and log them in.
     $this->adminUser = $this->drupalCreateUser([
       'access content',
@@ -56,24 +55,31 @@ class FreshdeskTestCase extends DrupalWebTestCase {
     $this->drupalLogin($this->adminUser);
     // Set the role as admin for the admin user just created.
     $this->drupalPost('user/' . $this->adminUser->uid . '/edit', ['roles[3]' => TRUE], t('Save'));
-
   }
 
-  function FreshdeskAdminConfigTest() {
+  /**
+   * Tests core setup for Freshdesk API key.
+   */
+  public function FreshdeskAdminConfigTest() {
     $edit = [];
     $edit['freshdesk_url'] = 'http://www.blabla.com';
     $edit['freshdesk_api_key'] = $this->randomName(8);
     $this->drupalPost('admin/config/services/freshdesk', $edit, t('Save configuration'));
     $this->assertText(t('The configuration options have been saved.'), t('Basic setup of module'));
-
   }
 
-  function FreshdeskAdminConfigPopupTest() {
+  /**
+   * Tests popup setup.
+   */
+  public function FreshdeskAdminConfigPopupTest() {
     $edit = [];
     $edit['freshdesk_widget_popup_enable'] = 1;
-
-
+    $edit['freshdesk_widget_popup_type'] = 'button';
+    $edit['freshdesk_widget_popup_type'] = 'https://s3.amazonaws.com/assets.freshdesk.com/widget/help-button.png';
+    $edit['freshdesk_widget_popup_roles_administrator'] = 1;
+    $edit['freshdesk_widget_popup_roles_authenticated_user'] = 1;
     $this->drupalPost('admin/config/services/freshdesk/widgetpopup', t('Save configuration'));
+    $this->assertText(t('The configuration options have been saved.'), t('Popup settings saved'));
   }
 
 }
