@@ -80,6 +80,9 @@ class FreshdeskTestCase extends DrupalWebTestCase {
     $edit['freshdesk_widget_popup_roles_authenticated_user'] = 1;
     $this->drupalPost('admin/config/services/freshdesk/widgetpopup', t('Save configuration'));
     $this->assertText(t('The configuration options have been saved.'), t('Popup settings saved'));
+    // Load front page and look for popup.
+    $this->drupalGet('');
+    $this->assertRaw('assets.freshdesk.com/widget/freshwidget.js', t('JS found on page for popup'));
   }
 
 }
