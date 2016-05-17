@@ -38,7 +38,7 @@ class FreshdeskTestCase extends DrupalWebTestCase {
   /**
    * {@inheritdoc}
    */
-  function setUp() {
+  public function setUp() {
     // Call the parent with an array of modules to enable for the test.
     $modules[] = 'freshdesk';
     parent::setUp($modules);
@@ -60,7 +60,7 @@ class FreshdeskTestCase extends DrupalWebTestCase {
   /**
    * Tests core setup for Freshdesk API key.
    */
-  public function FreshdeskAdminConfigTest() {
+  public function testFreshdeskAdminConfigTest() {
     $edit = [];
     $edit['freshdesk_url'] = 'http://www.blabla.com';
     $edit['freshdesk_api_key'] = $this->randomName(8);
@@ -71,7 +71,7 @@ class FreshdeskTestCase extends DrupalWebTestCase {
   /**
    * Tests popup setup.
    */
-  public function FreshdeskAdminConfigPopupTest() {
+  public function testFreshdeskAdminConfigPopupTest() {
     $edit = [];
     $edit['freshdesk_widget_popup_enable'] = 1;
     $edit['freshdesk_widget_popup_type'] = 'button';
