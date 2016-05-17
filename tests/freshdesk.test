@@ -15,7 +15,7 @@ class FreshdeskTestCase extends DrupalWebTestCase {
    */
   public static function getInfo() {
     return [
-      'name' => 'Admin testing',
+      'name' => 'Administrative setup testing',
       'description' => 'Basic configuration testing.',
       'group' => 'Freshdesk',
     ];
