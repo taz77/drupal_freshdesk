@@ -74,9 +74,9 @@ class FreshdeskTestCase extends DrupalWebTestCase {
   public function testFreshdeskAdminConfigPopupTest() {
     $edit = [];
     $this->drupalGet('admin/config/services/freshdesk/widgetpopu');
-    $edit['freshdesk_widget_popup_enable'] = 1;
-    $edit['freshdesk_widget_popup_type'] = 'button';
+    $edit['freshdesk_widget_popup_button_type[freshdesk_widget_popup_type]'] = 'button';
     $this->drupalPostAJAX(NULL, $edit, 'freshdesk_widget_popup_type');
+    $edit['freshdesk_widget_popup_enable'] = 1;
     $edit['freshdesk_widget_popup_type_attribute'] = 'https://s3.amazonaws.com/assets.freshdesk.com/widget/help-button.png';
     $edit['freshdesk_widget_popup_roles_administrator'] = 1;
     $edit['freshdesk_widget_popup_roles_authenticated_user'] = 1;
