@@ -87,4 +87,16 @@ class FreshdeskTestCase extends DrupalWebTestCase {
     $this->assertRaw('assets.freshdesk.com/widget/freshwidget.js', t('JS found on page for popup'));
   }
 
+  /**
+   * Tests embed setup.
+   */
+  public function testFreshdeskAdminConfigEmbedTest() {
+    // Set token.
+    $edit = [];
+    $this->drupalGet('admin/config/services/freshdesk/widgetembed');
+    $this->drupalPost(NULL, $edit, t('Save configuration'));
+    $this->assertText(t('The configuration options have been saved.'), t('Embed settings saved'));
+
+  }
+
 }
