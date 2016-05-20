@@ -118,14 +118,9 @@ class FreshdeskTestCase extends DrupalWebTestCase {
     $this->assertText(t('The configuration options have been saved.'), t('Basic setup of module'));
     $this->drupalGet('freshdesk/support/portal');
     $headers = $this->drupalGetHeaders(TRUE);
-    if(array_key_exists('Location', $headers)){
-      $check = $headers['Location'];
-    }
-    else {
-      $check = NULL;
-    }
-    $this->assertRaw('', t('SSO Header found on page'));
-    $this->assert();
+    $check = $this->freshdesk_check_header($headers, 'Location' , $this->ssoURL);
+    $this->assertTrue($check, t('Header found for SSO.'));
+
   }
 
   /**
@@ -134,9 +129,16 @@ class FreshdeskTestCase extends DrupalWebTestCase {
    * @param array $header
    * @param string $needle
    * @param string $value
+   * @return bool
    */
   private function freshdesk_check_header(array $header, $needle, $value){
-
+    if(array_key_exists($needle, $header)){
+      $evaluation = (strpos($header[$needle], $value)) ? TRUE : FALSE;
+      return $evaluation;
+    }
+    else {
+      return FALSE;
+    }
   }
 
 }
