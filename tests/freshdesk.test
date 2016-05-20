@@ -99,4 +99,17 @@ class FreshdeskTestCase extends DrupalWebTestCase {
 
   }
 
+  /**
+   * Tests SSO functionality to a limited state. There is no way to validate
+   * the SSO works all the way into Freshdesk because an account is required.
+   */
+  public function testFreshdeskSSOTest() {
+    $edit = [];
+    $edit['freshdesk_url'] = 'http://www.blabla.com';
+    $edit['freshdesk_api_key'] = $this->randomName(8);
+    $this->drupalPost('admin/config/services/freshdesk', $edit, t('Save configuration'));
+    $this->assertText(t('The configuration options have been saved.'), t('Basic setup of module'));
+
+  }
+
 }
