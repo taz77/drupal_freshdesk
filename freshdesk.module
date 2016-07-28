@@ -177,6 +177,12 @@ function freshdesk_page_build(&$page) {
     $freshdesk_popup_widget_options['freshdesk_widget_popup_form_attach'] = variable_get('freshdesk_widget_popup_form_attach', 1);
     $freshdesk_popup_widget_options['freshdesk_widget_popup_form_search'] = variable_get('freshdesk_widget_popup_form_search', 1);
     $freshdesk_popup_widget_options['freshdesk_widget_popup_form_requester_disable'] = variable_get('freshdesk_widget_popup_form_requester_disable', 0);
+    if ($freshdesk_popup_widget_options['freshdesk_widget_popup_form_requester'] == 0 && user_is_anonymous()) {
+      $freshdesk_popup_widget_options['freshdesk_widget_popup_form_requester'] = 1;
+      if (empty($freshdesk_popup_widget_options['freshdesk_widget_popup_form_requester_value'])) {
+        $freshdesk_popup_widget_options['freshdesk_widget_popup_form_requester_disable'] = 0;
+      }
+    }
     $markup = theme('freshdesk_popup', $freshdesk_popup_widget_options);
     drupal_add_js('https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js', array('type' => 'external'));
     drupal_add_js($markup, array('type' => 'inline', 'scope' => 'footer'));
@@ -268,6 +274,12 @@ function freshdesk_tokens($type, $tokens, array $data = array(), array $options 
           $freshdesk_embed_widget_options['freshdesk_widget_embed_form_requester'] = variable_get('freshdesk_widget_embed_form_requester', 0);
           $freshdesk_embed_widget_options['freshdesk_widget_embed_form_requester_value'] = variable_get('freshdesk_widget_embed_form_requester_value', '');
           $freshdesk_embed_widget_options['freshdesk_widget_embed_form_requester_disable'] = variable_get('freshdesk_widget_embed_form_requester_disable', 0);
+          if ($freshdesk_popup_widget_options['freshdesk_widget_embed_form_requester'] == 0 && user_is_anonymous()) {
+            $freshdesk_popup_widget_options['freshdesk_widget_embed_form_requester'] = 1;
+            if (empty($freshdesk_popup_widget_options['freshdesk_widget_embed_form_requester_value'])) {
+              $freshdesk_popup_widget_options['freshdesk_widget_embed_form_requester_disable'] = 0;
+            }
+          }
           $markup = theme('freshdesk_embed', $freshdesk_embed_widget_options);
           // We replace the token with the embed code from the template.
           $replacements[$original] = $markup;
