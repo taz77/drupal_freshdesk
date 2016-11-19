@@ -274,10 +274,10 @@ function freshdesk_tokens($type, $tokens, array $data = array(), array $options 
           $freshdesk_embed_widget_options['freshdesk_widget_embed_form_requester'] = variable_get('freshdesk_widget_embed_form_requester', 0);
           $freshdesk_embed_widget_options['freshdesk_widget_embed_form_requester_value'] = variable_get('freshdesk_widget_embed_form_requester_value', '');
           $freshdesk_embed_widget_options['freshdesk_widget_embed_form_requester_disable'] = variable_get('freshdesk_widget_embed_form_requester_disable', 0);
-          if ($freshdesk_popup_widget_options['freshdesk_widget_embed_form_requester'] == 0 && user_is_anonymous()) {
-            $freshdesk_popup_widget_options['freshdesk_widget_embed_form_requester'] = 1;
-            if (empty($freshdesk_popup_widget_options['freshdesk_widget_embed_form_requester_value'])) {
-              $freshdesk_popup_widget_options['freshdesk_widget_embed_form_requester_disable'] = 0;
+          if ($freshdesk_embed_widget_options['freshdesk_widget_embed_form_requester'] == 0 && user_is_anonymous()) {
+            $freshdesk_embed_widget_options['freshdesk_widget_embed_form_requester'] = 1;
+            if (empty($freshdesk_embed_widget_options['freshdesk_widget_embed_form_requester_value'])) {
+              $freshdesk_embed_widget_options['freshdesk_widget_embed_form_requester_disable'] = 0;
             }
           }
           $markup = theme('freshdesk_embed', $freshdesk_embed_widget_options);
