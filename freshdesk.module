@@ -106,8 +106,9 @@ function _freshdesk_support_portal() {
       }
     }
   }
-  header("Location: " . freshdesk_login_url($name, $user->mail));
-  return TRUE;
+  //header("Location: " . freshdesk_login_url($name, $user->mail));
+  drupal_goto(freshdesk_login_url($name, $user->mail), array('external' => TRUE));
+  drupal_exit(freshdesk_login_url($name, $user->mail));
 }
 
 
