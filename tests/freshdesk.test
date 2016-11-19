@@ -119,7 +119,8 @@ class FreshdeskTestCase extends DrupalWebTestCase {
     $this->drupalGet('freshdesk/support/portal');
     $headers = $this->drupalGetHeaders(TRUE);
     print_r($headers);
-    $check = $this->freshdesk_check_header($headers, 'location' , $this->ssoURL);
+    $check = $this->freshdesk_check_header($headers[0], 'location' , $this->ssoURL);
+    print_r($check);
     $this->assertTrue($check, t('Header found for SSO.'));
 
   }
