@@ -6,10 +6,10 @@
 // We must built the query string based on options to insert into the JS.
 $qstring = '&widgetType=popup';
 if ($freshdesk_widget_popup_form_requester == 0):
-  $qstring .= '&helpdesk_ticket[requester]=' . token_replace('[user:mail]', array('user' => $user));
+  $qstring .= '&helpdesk_ticket[requester]=' . urlencode(token_replace('[user:mail]', array('user' => $user)));
   $qstring .= '&disable[requester]=true';
 elseif (!empty($freshdesk_widget_popup_form_requester_value) && valid_email_address($freshdesk_widget_popup_form_requester_value)) :
-  $qstring .= '&helpdesk_ticket[requester]=' . $freshdesk_widget_popup_form_requester_value;
+  $qstring .= '&helpdesk_ticket[requester]=' . urlencode($freshdesk_widget_popup_form_requester_value);
   $qstring .= '&disable[requester]=true';
 endif;
 if (empty($freshdesk_widget_popup_form_responsive)):
