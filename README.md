@@ -3,7 +3,7 @@
         FRESDESK MODULE - README
 ______________________________________________________________________________
 
-NAME:       Freshdes
+NAME:       Freshdesk
 AUTHORS:    Brady Owens <info@fastglass.net>
 ______________________________________________________________________________
 
@@ -29,11 +29,19 @@ Step 3)
 
 Step 4)
   Go to "/admin/config/services/freshdesk" to configure the module.
-  
+
 Step 5)
   Enable permissions appropriate to your site.
 
   Go to "/admin/people/permissions" to configure permissions.
+
+Requirements
+-----------
+As of 20 August 2018, Freshdesk has changed the time-to-live on hashes generated
+for single sign on request to +/- 30 seconds. Any request made outside of that
+time restriction will not be allowed to login to Freshdesk. Due to this short
+amount of time, it is highly recommended that the server that hosts the Drupal
+site this module is installed on be synchronized via the network time protocol (NTP).
 
 EMBEDDED FORM
 
@@ -47,7 +55,7 @@ SSO URL
 
 This module provides an SSO URL to allow customers to authenticate with your
 Drupal user database to access Freshdesk without creating an account. Currently
-the URL is fixed and cannot be changed. Path for the SSO link is 
+the URL is fixed and cannot be changed. Path for the SSO link is
 freshdesk/support/portal. If your website was sample.com the address would be
 http://sample.com/freshdesk/support/portal
 It is highly recommended this be run of SSL.
