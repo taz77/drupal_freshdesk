@@ -26,22 +26,6 @@ function freshdesk_admin_account($form, &$form_state) {
     '#default_value' => variable_get('freshdesk_api_key', ''),
   );
 
-  $form['freshdesk_sso'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Single Sign-On Configuration'),
-    '#collapsible' => FALSE,
-  );
-  $form['freshdesk_sso']['freshdesk_sso_intro'] = array(
-    '#markup' => t('This creates a Simple SSO launch page at the path <tt>freshdesk/support/portal</tt>. <br />If you want to alter this path you can use a module such as Pathauto to do so.'),
-  );
-  $form['freshdesk_sso']['freshdesk_sso_key'] = array(
-    '#type' => 'textfield',
-    '#size' => '100',
-    '#title' => t('SSO Secret Key'),
-    '#default_value' => variable_get('freshdesk_sso_key', ''),
-    '#description' => t('Instructions on obtaining this key are available on Freshdesk support <a href="@url">page</a>', array('@url' => 'https://support.freshdesk.com/support/solutions/articles/31166-single-sign-on-remote-authentication-in-freshdesk')),
-  );
-
   return system_settings_form($form);
 }
 
