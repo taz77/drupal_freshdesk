@@ -15,3 +15,11 @@ function freshdesk_uninstall() {
     ->execute();
   cache_clear_all('variables', 'cache');
 }
+
+/**
+ * Remove variables no longer used for SSO.
+ */
+function freshdesk_update_7000() {
+  // Deleting unused variables.
+  variable_del('freshdesk_sso_key');
+}
